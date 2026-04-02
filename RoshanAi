@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Video Script Generator</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+  <h1>Upload Video 🎥</h1>
+  
+  <input type="file" id="videoInput"><br><br>
+  
+  <video id="preview" width="300" controls></video><br><br>
+  
+  <button onclick="generateScript()">Generate Script ✍️</button>
+  
+  <h2>Output:</h2>
+  <p id="output"></p>
+
+<script>
+const input = document.getElementById('videoInput');
+const preview = document.getElementById('preview');
+
+input.onchange = (e) => {
+  const file = e.target.files[0];
+  preview.src = URL.createObjectURL(file);
+};
+
+function generateScript(){
+  document.getElementById("output").innerText =
+  "🔥 Imagine ek powerful story... (AI script yaha aayega)";
+}
+</script>
+
+</body>
+</html>
