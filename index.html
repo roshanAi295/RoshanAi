@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>AI Video Tool</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #111;
-      color: white;
-    }
-    .box {
-      margin-top: 50px;
-    }
-    button {
-      padding: 10px 20px;
-      background: red;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
-</head>
+async function processVideo() {
+  let file = document.getElementById("videoUpload").files[0];
+  let output = document.getElementById("output");
 
-<body>
+  if (!file) {
+    alert("Upload video first!");
+    return;
+  }
 
-  <h1>🔥 AI Video Script Generator</h1>
+  output.innerText = "⏳ AI is analyzing video...";
 
-  <div class="box">
-    <input type="file" id="videoUpload" accept="video/*"><br><br>
-    <button onclick="processVideo()">Generate Script</button>
+  // For now dummy description (next step real video analysis)
+  let description = "A person doing something interesting in a village";
 
-    <p id="output"></p>
-  </div>
+  let res = await fetch("/api/script", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text: description
+    })
+  });
 
-  <script>
-    function processVideo() {
-      let file = document.getElementById("videoUpload").files[0];
+  let data = await res.json();
 
-      if (!file) {
-        alert("Upload video first!");
-        return;
-      }
-
-      document.getElementById("output").innerText =
-        "⏳ AI is analyzing video... (Coming Soon 🔥)";
-    }
-  </script>
-
-</body>
-</html>
+  output.innerText = data.result;
+}
